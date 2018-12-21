@@ -19,9 +19,11 @@ MAINTAINER Dockerfiles
 # Install required packages and remove the apt packages cache when done.
 
 RUN apt-get update && \
-    apt-get upgrade -y && \ 	
+    apt-get upgrade -y && \
     apt-get install -y \
 	git \
+  vim \
+  curl \
 	python3 \
 	python3-dev \
 	python3-setuptools \
@@ -51,7 +53,7 @@ COPY . /home/docker/code/
 
 # install django, normally you would remove this step because your project would already
 # be installed in the code/app/ directory
-RUN django-admin.py startproject website /home/docker/code/app/
+# RUN django-admin.py startproject website /home/docker/code/app/
 
-EXPOSE 80
+EXPOSE 8000
 CMD ["supervisord", "-n"]
